@@ -1,0 +1,59 @@
+/*
+ =====================================================================
+ RESPUESTAS A LAS PREGUNTAS DE ANÁLISIS (CASO DE ESTUDIO 1)
+ =====================================================================
+
+ 1. Explique, con una frase para cada una, por qué la flota no puede modelarse 
+    con una cola y por qué el turno del taller no puede modelarse con una pila[cite: 1].
+    
+    * R/ La flota no puede ser una cola porque requiere inserciones, bajas y 
+      búsquedas directas en cualquier posición de manera permanente, mientras 
+      que el turno del taller no puede ser una pila porque violaría la equidad 
+      del orden de llegada (FIFO), atendiendo por error a la última bicicleta 
+      reportada en lugar de respetar la precedencia.
+
+ ---------------------------------------------------------------------
+
+ 2. Describa cómo guarda y restaura la pila de piezas (R4 y R5) conservando 
+    el orden. Indique cuántas transferencias hace y el costo en notación O-grande[cite: 1].
+    
+    * R/ Se guardan y restauran mediante dos transferencias consecutivas a 
+      través de pilas auxiliares para revertir el orden dos veces (recuperando 
+      el sentido original de fondo a tope). Realiza un total de 2K transferencias 
+      (donde K es el número de piezas), teniendo un costo computacional de O(K), 
+      el cual equivale a O(1) al tratarse de un límite físico acotado de piezas.
+
+ ---------------------------------------------------------------------
+
+ 3. ¿Qué ocurre si el mecánico intenta montar una pieza con la pila vacía o 
+    cerrar una orden con piezas pendientes? Muestre la salida que produce[cite: 1].
+    
+    * R/ Si intenta montar con pila vacía, el sistema lo reporta como error y 
+      rechaza la acción ("ERROR: No se puede montar, la pila de piezas está vacía"). 
+      Si intenta cerrar una orden con piezas pendientes (violación de R6), el 
+      sistema bloquea el cierre emitiendo un mensaje de rechazo 
+      ("RECHAZADA (R6): No se puede cerrar la orden, la pila de piezas no está vacía").
+
+ ---------------------------------------------------------------------
+
+ 4. Indique el costo de buscar(codigo) en su lista y proponga una mejora para 
+    reducirlo, explicando qué costo adicional tendría[cite: 1].
+    
+    * R/ El costo actual de la búsqueda secuencial en la lista enlazada ordenada 
+      es O(N). Para reducirlo, se puede implementar un índice o tabla Hash de 
+      acceso directo, lo que llevaría el costo a O(1) a cambio de un costo 
+      adicional de memoria de O(N) y una sobrecarga menor en las operaciones de 
+      inserción para actualizar las referencias.
+
+ ---------------------------------------------------------------------
+
+ 5. Si el taller abriera un segundo puesto de trabajo, ¿qué estructuras 
+    tendría que duplicar y cuáles seguirían siendo una sola? Justifique[cite: 1].
+    
+    * R/ Se tendrían que duplicar las pilas de piezas (ya que cada puesto de 
+      trabajo posee su propia mesa de desarmado independiente), mientras que la 
+      lista de flota, la cola del taller y la cola de repuestos seguirían siendo 
+      únicas y globales, porque alimentan y centralizan de forma compartida 
+      toda la operación de la ciudad.
+ =====================================================================
+*/
